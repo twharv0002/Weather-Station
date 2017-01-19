@@ -152,11 +152,11 @@ public class WeatherStationController {
 				images[i] = makeImage(weatherList.get(i + 1).iconURL);
 			}
 			
-			firstDayLabel.setText(weatherList.get(1).dayOfWeek);
-			secondDayLabel.setText(weatherList.get(2).dayOfWeek);
-			thirdDayLabel.setText(weatherList.get(3).dayOfWeek);
-			fourthDayLabel.setText(weatherList.get(4).dayOfWeek);
-			fifthDayLabel.setText(weatherList.get(5).dayOfWeek);
+			firstDayLabel.setText(weatherList.get(1).getDayOfWeek());
+			secondDayLabel.setText(weatherList.get(2).getDayOfWeek());
+			thirdDayLabel.setText(weatherList.get(3).getDayOfWeek());
+			fourthDayLabel.setText(weatherList.get(4).getDayOfWeek());
+			fifthDayLabel.setText(weatherList.get(5).getDayOfWeek());
 			
 			firstDayImageView.setImage(images[0]);
 			secondDayImageView.setImage(images[1]);

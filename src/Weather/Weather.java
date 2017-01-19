@@ -34,7 +34,43 @@ public class Weather {
         date = convertTimeStampDate(timeStamp);
     }
 
-    public static String convertTimeStampToday(long timeStamp)
+    public String getDayOfWeek() {
+		return dayOfWeek;
+	}
+
+	public String getCurrentTemp() {
+		return currentTemp;
+	}
+
+	public String getMinTemp() {
+		return minTemp;
+	}
+
+	public String getMaxTemp() {
+		return maxTemp;
+	}
+
+	public String getHumidity() {
+		return humidity;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public String getIconURL() {
+		return iconURL;
+	}
+
+	public String getPressure() {
+		return pressure;
+	}
+
+	public String getDate() {
+		return date;
+	}
+
+	public static String convertTimeStampToday(long timeStamp)
     {
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(timeStamp * 1000);
