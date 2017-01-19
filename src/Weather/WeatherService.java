@@ -95,13 +95,13 @@ public class WeatherService {
 			weatherList.clear();
 			
 			try {			
-				long day = System.currentTimeMillis() / 1000L; // UNIX time
+				long day = System.currentTimeMillis() / 1000L;
 				int secInDay = 86400;
 				int remainingTime = days * 86400;
 				
 				double[] locationCoords = getCoords(location);
-				System.out.println("Lat: " + locationCoords[0]); // Testing
-				System.out.println("Lng: " + locationCoords[1]); // Testing
+				System.out.println("Lat: " + locationCoords[0]);
+				System.out.println("Lng: " + locationCoords[1]);
 				
 				URL url = WeatherURL.createHistoricalURL(locationCoords[0], locationCoords[1], day, location);
 				
