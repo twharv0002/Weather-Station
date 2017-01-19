@@ -16,7 +16,6 @@ public class Weather {
     private final String pressure;
     private String date;
 
-    //Constructor
     public Weather(long timeStamp, double minTemp, double maxTemp,
                    double humidity, String description, String iconName, double pressure, double currentTemp){
 
