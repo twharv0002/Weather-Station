@@ -35,28 +35,6 @@ public class WeatherService {
 		return weatherList;
 	}	
 		
-		private void convertJSONHistorical(JSONObject historical){
-
-			try {
-				JSONObject daily = historical.getJSONObject("daily");
-				JSONObject currently = historical.getJSONObject("currently");
-				JSONObject data = daily.getJSONArray("data").getJSONObject(0);
-				
-				weatherList.add(new Weather(
-						currently.getLong("time"),
-						data.getDouble("temperatureMin"), 
-						data.getDouble("temperatureMax"), 
-						currently.getDouble("humidity"), 
-						currently.getString("summary"),
-						data.getString("icon"),
-						currently.getDouble("pressure"),
-						currently.getDouble("temperature")
-						));
-							
-			} catch (JSONException e) {
-				e.printStackTrace();
-			}
-		}
 		// Create URL using the Open Weather Station API
 		private static URL createURL(String weatherDataType, String location){
 			
@@ -117,7 +95,7 @@ public class WeatherService {
 		}
 		
 		// getWeatherTask opens connection to the given URL and returns a JSON object
-		private static JSONObject getWeatherTask(URL url){
+		private JSONObject getWeatherTask(URL url){
 			
 			HttpURLConnection con = null;
 			
@@ -154,7 +132,7 @@ public class WeatherService {
 		}
 		// getCoords method - uses googles geocoding API to translate names to lat and lng coords.
 		// returns an array of two elements: lat and lng, respectively.
-		public static double[] getCoords(String area){
+		public double[] getCoords(String area){
 			
 			double[] coords = new double[2];
 			String googleAPIKey = "AIzaSyBuihsZXM2hWPZfgOUOZ5uHNlRxLxb2zyQ";
