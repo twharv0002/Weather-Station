@@ -33,59 +33,7 @@ public class WeatherService {
 	public List<Weather> getForecast(String location){
 		populateWeatherListForecast(location);
 		return weatherList;
-	}
-	
-	// Converts Forecast JSON object to Weather object and adds it to weatherList.
-		private void convertJSONForecast(JSONObject forecast){	
-			weatherList.clear();
-			
-			try {
-				JSONArray list = forecast.getJSONArray("list");
-				
-				for(int i = 0; i < list.length(); ++i){
-					JSONObject day = list.getJSONObject(i);
-					JSONObject temps = day.getJSONObject("temp");
-					JSONObject weather = day.getJSONArray("weather").getJSONObject(0);
-					
-					weatherList.add(new Weather(
-							day.getLong("dt"),
-							temps.getDouble("min"),
-							temps.getDouble("max"),
-							day.getDouble("humidity"),
-							weather.getString("description"),
-							weather.getString("icon"),
-							day.getDouble("pressure"),
-							temps.getDouble("day")
-							));
-				}
-			} catch (JSONException e) {
-				e.printStackTrace();
-			}
-			
-		}
-		
-		private void convertJSONcurrentWeather(JSONObject current){		
-			weatherList.clear();
-				
-				try {
-					JSONObject main = current.getJSONObject("main");
-					JSONObject weather = current.getJSONArray("weather").getJSONObject(0);
-					
-					weatherList.add(new Weather(
-							current.getLong("dt"),
-							main.getDouble("temp_min"),
-							main.getDouble("temp_max"),
-							main.getDouble("humidity"),
-							weather.getString("description"),
-							weather.getString("icon"),
-							main.getDouble("pressure"),
-							main.getDouble("temp")
-							));
-								
-				} catch (JSONException e) {
-					e.printStackTrace();
-				}		
-		}
+	}	
 		
 		private void convertJSONHistorical(JSONObject historical){
 			
@@ -266,7 +214,6 @@ public class WeatherService {
 			if(url != null){
 				JSONObject forecast = getWeatherTask(url);
 				weatherList = JSONConverter.convertJSONForecast(forecast);
-				convertJSONForecast(forecast);
 			}
 		}
 		
@@ -277,7 +224,7 @@ public class WeatherService {
 			if(url != null){
 				
 				JSONObject current = getWeatherTask(url);
-				convertJSONcurrentWeather(current);
+				weatherList = JSONConverter.convertJSONcurrentWeather(current);
 			}
 		}
 		
