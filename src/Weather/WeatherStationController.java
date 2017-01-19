@@ -48,12 +48,9 @@ public class WeatherStationController implements Initializable{
 	
 	private WeatherService weatherService;
 	
-	private List<Weather> weatherList = new ArrayList<>(); // List to store weather objects
-	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		weatherService = new WeatherService();
-		
 		currentWeatherLabel.setText("Current Weather");
 		
 	}
@@ -79,13 +76,12 @@ public class WeatherStationController implements Initializable{
 	}
 	
 	private void getCurrentWeather(){
-		
+		List<Weather> weatherList = new ArrayList<>();
 		String location = searchTextField.getText();
 		String weatherInfo = "";
 		String extraInfo = "";
 		
 		if(isValidLocation(location)){		
-			// Populate weatherList with appropriate data
 			weatherList = weatherService.getCurrentWeather(location);
 			
 			// Setting the text of a label
@@ -112,15 +108,11 @@ public class WeatherStationController implements Initializable{
 
 	private void getHistoricalWeather(){
 		String location = searchTextField.getText();
-		
+		List<Weather> weatherList = new ArrayList<>();
 		if(isValidLocation(location)){
 			weatherList = weatherService.getHistoricalWeather(5, location);
 			
-			firstDayLabel.setText(weatherList.get(4).getDate());
-			secondDayLabel.setText(weatherList.get(3).getDate());
-			thirdDayLabel.setText(weatherList.get(2).getDate());
-			fourthDayLabel.setText(weatherList.get(1).getDate());
-			fifthDayLabel.setText(weatherList.get(0).getDate());
+			setDateForWeekLabels(weatherList);
 			
 			firstDayImageView.setImage(new Image("assets/noPhoto-icon.png", 70, 70, false, false));
 			secondDayImageView.setImage(new Image("assets/noPhoto-icon.png", 70, 70, false, false));
@@ -143,11 +135,18 @@ public class WeatherStationController implements Initializable{
 		}
 	
 	}
+	public void setDateForWeekLabels(List<Weather> weatherList) {
+		firstDayLabel.setText(weatherList.get(4).getDate());
+		secondDayLabel.setText(weatherList.get(3).getDate());
+		thirdDayLabel.setText(weatherList.get(2).getDate());
+		fourthDayLabel.setText(weatherList.get(1).getDate());
+		fifthDayLabel.setText(weatherList.get(0).getDate());
+	}
 	
 	private void getForecast(){
 		
 		String location = searchTextField.getText();
-		
+		List<Weather> weatherList = new ArrayList<>();
 		if(isValidLocation(location)){
 		
 			weatherList = weatherService.getForecast(location);
