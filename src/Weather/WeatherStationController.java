@@ -1,4 +1,4 @@
-package Weather;
+package weather;
 
 import java.awt.Desktop.Action;
 import java.awt.image.BufferedImage;

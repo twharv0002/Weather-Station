@@ -1,4 +1,4 @@
-package Weather;
+package weather;
 
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;

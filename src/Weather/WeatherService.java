@@ -1,4 +1,4 @@
-package Weather;
+package weather;
 
 import java.io.BufferedReader;
 import java.io.IOException;
