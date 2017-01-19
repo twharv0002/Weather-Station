@@ -43,9 +43,7 @@ public class WeatherStationController {
 	@FXML private ImageView fourthDayImageView;
 	@FXML private ImageView fifthDayImageView;
 	@FXML private ImageView currentWeatherImageView;
-
 	
-	private static final int HISTORICAL_DAYS = 5; // Number of days back for historical weather
 	private List<Weather> weatherList = new ArrayList<>(); // List to store weather objects
 	
 	@FXML
