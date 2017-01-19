@@ -43,8 +43,7 @@ public class WeatherService {
 				for(int i = 0; i < list.length(); ++i){
 					JSONObject day = list.getJSONObject(i);
 					JSONObject temps = day.getJSONObject("temp");
-					JSONObject weather =
-							day.getJSONArray("weather").getJSONObject(0);
+					JSONObject weather = day.getJSONArray("weather").getJSONObject(0);
 					
 					weatherList.add(new Weather(
 							day.getLong("dt"),
@@ -188,13 +187,11 @@ public class WeatherService {
 					}
 					catch(IOException e){
 						e.printStackTrace();
-						//label.setText("Unable to read weather data");
 					}
 					
 					return new JSONObject(builder.toString());
 				}
 				else{
-					//label.setText("Failed");
 					System.out.println(response);
 				}
 			}
@@ -255,9 +252,6 @@ public class WeatherService {
 							
 					}while(remainingTime > 0);
 				}
-				else{
-					//label.setText("Invalid URL");
-				}
 				
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -271,9 +265,6 @@ public class WeatherService {
 				JSONObject forecast = getWeatherTask(url);
 				convertJSONForecast(forecast);
 			}
-			else{
-				//label.setText("Invalid URL");
-			}
 		}
 		
 		private void populateWeatherListCurrent(String location){
@@ -284,9 +275,6 @@ public class WeatherService {
 				
 				JSONObject current = getWeatherTask(url);
 				convertJSONcurrentWeather(current);
-			}
-			else{
-				//label.setText("Invalid URL");
 			}
 		}
 		
