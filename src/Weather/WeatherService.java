@@ -53,7 +53,6 @@ public class WeatherService {
 					
 					JSONObject historical = getWeatherTask(url);	
 					weatherList.add(JSONConverter.convertJSONHistorical(historical));
-					//convertJSONHistorical(historical);
 					remainingTime -= secInDay;
 					day -= secInDay;
 						
@@ -66,7 +65,6 @@ public class WeatherService {
 	}
 
 	private void populateWeatherListForecast(String location){
-		//URL url = createURL("forecast/daily", location);
 		URL url = WeatherURL.createURL("forecast/daily", location);
 		
 		if(url != null){

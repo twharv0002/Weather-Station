@@ -204,7 +204,7 @@ public class WeatherStationController implements Initializable{
 		
 		return image;		
 	}
-	// Method to validate user input
+	
 	private boolean isValidLocation(String location) {
 		String cityRegex = "^[a-zA-Z]+(?:[\\s-][a-zA-Z]+)*$"; 
 		String zipRegex = "^[0-9]{5}$"; 
