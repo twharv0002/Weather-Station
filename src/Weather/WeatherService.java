@@ -5,16 +5,12 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Pattern;
-
-import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import utility.JSONConverter;
+import utility.WeatherURL;
 
 public class WeatherService {
 	
@@ -34,65 +30,6 @@ public class WeatherService {
 		populateWeatherListForecast(location);
 		return weatherList;
 	}	
-		
-		// Create URL using the Open Weather Station API
-		private static URL createURL(String weatherDataType, String location){
-			
-			String apiKey = "f8eed5cc021d0b009e7d00a60e1c47b4";
-			String baseURL = "http://api.openweathermap.org/data/2.5/";
-			String locationURL = baseURL + weatherDataType;
-			
-			// Validate input and determine if entry is a city or a zipcode
-				
-				if(validateEntry(location) == 0){
-					locationURL += "?q=";
-				}
-				else if(validateEntry(location) == 1){
-					locationURL += "?zip=";
-					
-				}
-				else{
-					return null;
-				}
-			try{	
-				String encodedLocation = URLEncoder.encode(location, "UTF-8");
-				
-				return new URL(locationURL + encodedLocation + "&units=imperial&cnt=16&APPID=" + apiKey);
-				
-			}
-			catch(Exception e){
-				e.printStackTrace();
-			}
-			
-			return null;
-		}
-		
-		// Create URL using The Dark Sky Forecast API
-		private static URL createHistoricalURL(double lat, double lon, long time, String location){
-			
-			String apiKey = "03f925195946a60805429c61e0ffd515/";
-			String baseURL = "https://api.forecast.io/forecast/";
-			
-			// Validate input and determine if entry is a city or a zipcode
-				
-				if(!(validateEntry(location) == -1)){
-					
-					try {
-						String encodedURL = URLEncoder.encode(lat + "," + lon + "," + time, "UTF-8");
-						return new URL(baseURL + apiKey + encodedURL);
-						
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
-				}
-				else{
-					//myTextField.setText("Invalid Entry");
-					return null;
-				}
-			
-			return null;
-			
-		}
 		
 		// getWeatherTask opens connection to the given URL and returns a JSON object
 		private JSONObject getWeatherTask(URL url){
@@ -166,12 +103,12 @@ public class WeatherService {
 				System.out.println("Lat: " + locationCoords[0]); // Testing
 				System.out.println("Lng: " + locationCoords[1]); // Testing
 				
-				URL url = createHistoricalURL(locationCoords[0], locationCoords[1], day, location);
+				URL url = WeatherURL.createHistoricalURL(locationCoords[0], locationCoords[1], day, location);
 				
 				if(url != null){
 					
 					do{
-						url = createHistoricalURL(locationCoords[0], locationCoords[1], day - secInDay, location);
+						url = WeatherURL.createHistoricalURL(locationCoords[0], locationCoords[1], day - secInDay, location);
 						
 						JSONObject historical = getWeatherTask(url);	
 						weatherList.add(JSONConverter.convertJSONHistorical(historical));
@@ -188,7 +125,8 @@ public class WeatherService {
 		}
 		
 		private void populateWeatherListForecast(String location){
-			URL url = createURL("forecast/daily", location);
+			//URL url = createURL("forecast/daily", location);
+			URL url = WeatherURL.createURL("forecast/daily", location);
 			
 			if(url != null){
 				JSONObject forecast = getWeatherTask(url);
@@ -198,30 +136,12 @@ public class WeatherService {
 		
 		private void populateWeatherListCurrent(String location){
 			
-			URL url = createURL("weather", location);
+			URL url = WeatherURL.createURL("weather", location);
 			
 			if(url != null){
 				
 				JSONObject current = getWeatherTask(url);
 				weatherList = JSONConverter.convertJSONcurrentWeather(current);
-			}
-		}
-		
-		private static int validateEntry(String location){
-			String cityRegex = "^[a-zA-Z]+(?:[\\s-][a-zA-Z]+)*$"; 
-			String zipRegex = "^[0-9]{5}$"; 
-			
-			boolean validCity = Pattern.matches(cityRegex, location);
-			boolean validZipcode = Pattern.matches(zipRegex, location);
-				
-			if(validCity){
-				return 0;
-			}
-			else if(validZipcode){
-				return 1;
-			}
-			else{
-				return -1;
 			}
 		}
 		
