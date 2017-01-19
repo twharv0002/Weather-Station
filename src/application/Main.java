@@ -27,7 +27,7 @@ public class Main extends Application {
 	private void loadFXMLView()
 	{
 		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(Main.class.getResource("/Weather View.fxml"));
+		loader.setLocation(Main.class.getResource("/views/Weather View.fxml"));
 		
 		try{
 			root = (AnchorPane)loader.load();
@@ -36,7 +36,7 @@ public class Main extends Application {
 			
 			primaryStage.setScene(scene);
 			
-			scene.getStylesheets().add("application/application.css");
+			scene.getStylesheets().add("/styles/application.css");
 					
 			primaryStage.show();
 		}
