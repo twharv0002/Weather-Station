@@ -16,9 +16,9 @@ import org.json.JSONObject;
 
 public class WeatherService {
 	
-	private static List<Weather> weatherList = new ArrayList<>();
+	private List<Weather> weatherList = new ArrayList<>();
 	
-	public static List<Weather> getHistoricalWeather(int days, String location){
+	public List<Weather> getHistoricalWeather(int days, String location){
 		populateWeatherListHistorical(days, location);
 		return weatherList;
 	}
@@ -28,13 +28,13 @@ public class WeatherService {
 		return weatherList;
 	}
 	
-	public static List<Weather> getForecast(String location){
+	public List<Weather> getForecast(String location){
 		populateWeatherListForecast(location);
 		return weatherList;
 	}
 	
 	// Converts Forecast JSON object to Weather object and adds it to weatherList.
-		private static void convertJSONForecast(JSONObject forecast){	
+		private void convertJSONForecast(JSONObject forecast){	
 			weatherList.clear();
 			
 			try {
@@ -63,7 +63,7 @@ public class WeatherService {
 			
 		}
 		
-		private static void convertJSONcurrentWeather(JSONObject current){		
+		private void convertJSONcurrentWeather(JSONObject current){		
 			weatherList.clear();
 				
 				try {
@@ -86,7 +86,7 @@ public class WeatherService {
 				}		
 		}
 		
-		private static void convertJSONHistorical(JSONObject historical){
+		private void convertJSONHistorical(JSONObject historical){
 			
 			try {
 				JSONObject daily = historical.getJSONObject("daily");
@@ -228,7 +228,7 @@ public class WeatherService {
 			return null;
 		}
 		
-		private static void populateWeatherListHistorical(int days, String location)
+		private void populateWeatherListHistorical(int days, String location)
 		{
 			weatherList.clear();
 			
@@ -264,7 +264,7 @@ public class WeatherService {
 			}
 		}
 		
-		private static void populateWeatherListForecast(String location){
+		private void populateWeatherListForecast(String location){
 			URL url = createURL("forecast/daily", location);
 			
 			if(url != null){
@@ -276,7 +276,7 @@ public class WeatherService {
 			}
 		}
 		
-		private static void populateWeatherListCurrent(String location){
+		private void populateWeatherListCurrent(String location){
 			
 			URL url = createURL("weather", location);
 			

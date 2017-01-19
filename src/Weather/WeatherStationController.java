@@ -63,7 +63,7 @@ public class WeatherStationController implements Initializable{
 		getForecast();
 		showingInfoLabel.setText("Forecast");
 	}
-	// Test action listeners
+	
 	@FXML
 	void onForecastButtonClick(ActionEvent event){
 		getCurrentWeather();
@@ -78,14 +78,13 @@ public class WeatherStationController implements Initializable{
 		showingInfoLabel.setText("Five Day Historical");
 	}
 	
-	// Test methods
 	private void getCurrentWeather(){
 		
-		String location = searchTextField.getText(); // Get user input from text field
+		String location = searchTextField.getText();
 		String weatherInfo = "";
 		String extraInfo = "";
 		
-		if(isValidLocation(location)){ // Validates user input			
+		if(isValidLocation(location)){		
 			// Populate weatherList with appropriate data
 			weatherList = weatherService.getCurrentWeather(location);
 			
@@ -115,7 +114,7 @@ public class WeatherStationController implements Initializable{
 		String location = searchTextField.getText();
 		
 		if(isValidLocation(location)){
-			weatherList = WeatherService.getHistoricalWeather(5, location);
+			weatherList = weatherService.getHistoricalWeather(5, location);
 			
 			firstDayLabel.setText(weatherList.get(4).getDate());
 			secondDayLabel.setText(weatherList.get(3).getDate());
@@ -151,7 +150,7 @@ public class WeatherStationController implements Initializable{
 		
 		if(isValidLocation(location)){
 		
-			weatherList = WeatherService.getForecast(location);
+			weatherList = weatherService.getForecast(location);
 			
 			Image[] images = new Image[5];
 			for(int i = 0; i < 5; i++){
