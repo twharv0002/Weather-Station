@@ -113,27 +113,32 @@ public class WeatherStationController implements Initializable{
 			weatherList = weatherService.getHistoricalWeather(5, location);
 			
 			setDateForWeekLabels(weatherList);
-			
-			firstDayImageView.setImage(new Image("assets/noPhoto-icon.png", 70, 70, false, false));
-			secondDayImageView.setImage(new Image("assets/noPhoto-icon.png", 70, 70, false, false));
-			thirdDayImageView.setImage(new Image("assets/noPhoto-icon.png", 70, 70, false, false));
-			fourthDayImageView.setImage(new Image("assets/noPhoto-icon.png", 70, 70, false, false));
-			fifthDayImageView.setImage(new Image("assets/noPhoto-icon.png", 70, 70, false, false));
+			setImagesForWeekImageView();
 			
 			System.out.println(weatherList.get(0).getIconURL());
 			
-			firstDayWeatherLabel.setText("\n" + weatherList.get(4).getDescription() + "\n\n" 
-					+ "Max: " +  weatherList.get(4).getMaxTemp() + "\n\n" + "Min: " + weatherList.get(4).getMinTemp());
-			secondDayWeatherLabel.setText("\n" + weatherList.get(3).getDescription() + "\n\n" 
-					+ "Max: " +  weatherList.get(3).getMaxTemp() + "\n\n" + "Min: " + weatherList.get(3).getMinTemp());
-			thirdDayWeatherLabel.setText("\n" + weatherList.get(2).getDescription() + "\n\n" 
-					+ "Max: " +  weatherList.get(2).getMaxTemp() + "\n\n" + "Min: " + weatherList.get(2).getMinTemp());
-			fourthDayWeatherLabel.setText("\n" + weatherList.get(1).getDescription() + "\n\n" 
-					+ "Max: " +  weatherList.get(1).getMaxTemp() + "\n\n" + "Min: " + weatherList.get(1).getMinTemp());
-			fifthDayWeatherLabel.setText("\n" + weatherList.get(0).getDescription() + "\n\n" 
-					+ "Max: " +  weatherList.get(0).getMaxTemp() + "\n\n" + "Min: " + weatherList.get(0).getMinTemp());	
+			setDescriptionLabels(weatherList);	
 		}
 	
+	}
+	public void setDescriptionLabels(List<Weather> weatherList) {
+		firstDayWeatherLabel.setText("\n" + weatherList.get(4).getDescription() + "\n\n" 
+				+ "Max: " +  weatherList.get(4).getMaxTemp() + "\n\n" + "Min: " + weatherList.get(4).getMinTemp());
+		secondDayWeatherLabel.setText("\n" + weatherList.get(3).getDescription() + "\n\n" 
+				+ "Max: " +  weatherList.get(3).getMaxTemp() + "\n\n" + "Min: " + weatherList.get(3).getMinTemp());
+		thirdDayWeatherLabel.setText("\n" + weatherList.get(2).getDescription() + "\n\n" 
+				+ "Max: " +  weatherList.get(2).getMaxTemp() + "\n\n" + "Min: " + weatherList.get(2).getMinTemp());
+		fourthDayWeatherLabel.setText("\n" + weatherList.get(1).getDescription() + "\n\n" 
+				+ "Max: " +  weatherList.get(1).getMaxTemp() + "\n\n" + "Min: " + weatherList.get(1).getMinTemp());
+		fifthDayWeatherLabel.setText("\n" + weatherList.get(0).getDescription() + "\n\n" 
+				+ "Max: " +  weatherList.get(0).getMaxTemp() + "\n\n" + "Min: " + weatherList.get(0).getMinTemp());
+	}
+	public void setImagesForWeekImageView() {
+		firstDayImageView.setImage(new Image("assets/noPhoto-icon.png", 70, 70, false, false));
+		secondDayImageView.setImage(new Image("assets/noPhoto-icon.png", 70, 70, false, false));
+		thirdDayImageView.setImage(new Image("assets/noPhoto-icon.png", 70, 70, false, false));
+		fourthDayImageView.setImage(new Image("assets/noPhoto-icon.png", 70, 70, false, false));
+		fifthDayImageView.setImage(new Image("assets/noPhoto-icon.png", 70, 70, false, false));
 	}
 	public void setDateForWeekLabels(List<Weather> weatherList) {
 		firstDayLabel.setText(weatherList.get(4).getDate());
