@@ -111,15 +111,11 @@ public class WeatherStationController implements Initializable{
 		List<Weather> weatherList = new ArrayList<>();
 		if(isValidLocation(location)){
 			weatherList = weatherService.getHistoricalWeather(5, location);
-			
 			setDateForWeekLabels(weatherList);
 			setImagesForWeekImageView();
-			
 			System.out.println(weatherList.get(0).getIconURL());
-			
 			setDescriptionLabels(weatherList);	
 		}
-	
 	}
 	public void setDescriptionLabels(List<Weather> weatherList) {
 		firstDayWeatherLabel.setText("\n" + weatherList.get(4).getDescription() + "\n\n" 
@@ -190,7 +186,6 @@ public class WeatherStationController implements Initializable{
 		}
 	}
 	
-	// Method to simplify making image icons
 	private Image makeImage(String imageURL){
 		
 		BufferedImage bufferedImage = null;
