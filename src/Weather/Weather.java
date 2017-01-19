@@ -70,7 +70,7 @@ public class Weather {
 		return date;
 	}
 
-	public static String convertTimeStampToday(long timeStamp)
+	public String convertTimeStampToday(long timeStamp)
     {
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(timeStamp * 1000);
@@ -84,7 +84,7 @@ public class Weather {
         return dateFormatter.format(calendar.getTime());
     }
     
-    public static String convertTimeStampDate(long timeStamp)
+    public String convertTimeStampDate(long timeStamp)
     {
     	Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(timeStamp * 1000);
