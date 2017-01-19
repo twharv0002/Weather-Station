@@ -6,15 +6,15 @@ import java.util.Calendar;
 import java.util.TimeZone;
 
 public class Weather {
-    public final String dayOfWeek;
-    public final String currentTemp;
-    public final String minTemp;
-    public final String maxTemp;
-    public final String humidity;
-    public final String description;
-    public final String iconURL;
-    public final String pressure;
-    public String date;
+    private final String dayOfWeek;
+    private final String currentTemp;
+    private final String minTemp;
+    private final String maxTemp;
+    private final String humidity;
+    private final String description;
+    private final String iconURL;
+    private final String pressure;
+    private String date;
 
     //Constructor
     public Weather(long timeStamp, double minTemp, double maxTemp,

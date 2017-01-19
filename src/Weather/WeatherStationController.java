@@ -84,19 +84,19 @@ public class WeatherStationController {
 			weatherList = WeatherService.getCurrentWeather(location);
 			
 			// Setting the text of a label
-			weatherInfo += "\n\nCurrent Temperature: " + weatherList.get(0).currentTemp + "\n\n"
-					+ "Max Temp: " + weatherList.get(0).maxTemp + "\n\n"
-					+ "Min Temp: " + weatherList.get(0).minTemp;
+			weatherInfo += "\n\nCurrent Temperature: " + weatherList.get(0).getCurrentTemp() + "\n\n"
+					+ "Max Temp: " + weatherList.get(0).getMaxTemp() + "\n\n"
+					+ "Min Temp: " + weatherList.get(0).getMinTemp();
 			currentWeatherInfoLabel.setText(weatherInfo);
 			
-			extraInfo += "\n\n\nDescription: " + weatherList.get(0).description + "\n\n"
-					+ "Humidity: " + weatherList.get(0).humidity + "\n\n"
-					+ "Pressure: " + weatherList.get(0).pressure + "\n";
+			extraInfo += "\n\n\nDescription: " + weatherList.get(0).getDescription() + "\n\n"
+					+ "Humidity: " + weatherList.get(0).getHumidity() + "\n\n"
+					+ "Pressure: " + weatherList.get(0).getPressure() + "\n";
 			
 			extraInfoLabel.setText(extraInfo);
 			
 			// Setting an image
-			Image icon = makeImage(weatherList.get(0).iconURL);
+			Image icon = makeImage(weatherList.get(0).getIconURL());
 			currentWeatherImageView.setImage(icon);
 	
 		}
@@ -111,11 +111,11 @@ public class WeatherStationController {
 		if(isValidLocation(location)){
 			weatherList = WeatherService.getHistoricalWeather(5, location);
 			
-			firstDayLabel.setText(weatherList.get(4).date);
-			secondDayLabel.setText(weatherList.get(3).date);
-			thirdDayLabel.setText(weatherList.get(2).date);
-			fourthDayLabel.setText(weatherList.get(1).date);
-			fifthDayLabel.setText(weatherList.get(0).date);
+			firstDayLabel.setText(weatherList.get(4).getDate());
+			secondDayLabel.setText(weatherList.get(3).getDate());
+			thirdDayLabel.setText(weatherList.get(2).getDate());
+			fourthDayLabel.setText(weatherList.get(1).getDate());
+			fifthDayLabel.setText(weatherList.get(0).getDate());
 			
 			firstDayImageView.setImage(new Image("assets/noPhoto-icon.png", 70, 70, false, false));
 			secondDayImageView.setImage(new Image("assets/noPhoto-icon.png", 70, 70, false, false));
@@ -123,18 +123,18 @@ public class WeatherStationController {
 			fourthDayImageView.setImage(new Image("assets/noPhoto-icon.png", 70, 70, false, false));
 			fifthDayImageView.setImage(new Image("assets/noPhoto-icon.png", 70, 70, false, false));
 			
-			System.out.println(weatherList.get(0).iconURL);
+			System.out.println(weatherList.get(0).getIconURL());
 			
-			firstDayWeatherLabel.setText("\n" + weatherList.get(4).description + "\n\n" 
-					+ "Max: " +  weatherList.get(4).maxTemp + "\n\n" + "Min: " + weatherList.get(4).minTemp);
-			secondDayWeatherLabel.setText("\n" + weatherList.get(3).description + "\n\n" 
-					+ "Max: " +  weatherList.get(3).maxTemp + "\n\n" + "Min: " + weatherList.get(3).minTemp);
-			thirdDayWeatherLabel.setText("\n" + weatherList.get(2).description + "\n\n" 
-					+ "Max: " +  weatherList.get(2).maxTemp + "\n\n" + "Min: " + weatherList.get(2).minTemp);
-			fourthDayWeatherLabel.setText("\n" + weatherList.get(1).description + "\n\n" 
-					+ "Max: " +  weatherList.get(1).maxTemp + "\n\n" + "Min: " + weatherList.get(1).minTemp);
-			fifthDayWeatherLabel.setText("\n" + weatherList.get(0).description + "\n\n" 
-					+ "Max: " +  weatherList.get(0).maxTemp + "\n\n" + "Min: " + weatherList.get(0).minTemp);	
+			firstDayWeatherLabel.setText("\n" + weatherList.get(4).getDescription() + "\n\n" 
+					+ "Max: " +  weatherList.get(4).getMaxTemp() + "\n\n" + "Min: " + weatherList.get(4).getMinTemp());
+			secondDayWeatherLabel.setText("\n" + weatherList.get(3).getDescription() + "\n\n" 
+					+ "Max: " +  weatherList.get(3).getMaxTemp() + "\n\n" + "Min: " + weatherList.get(3).getMinTemp());
+			thirdDayWeatherLabel.setText("\n" + weatherList.get(2).getDescription() + "\n\n" 
+					+ "Max: " +  weatherList.get(2).getMaxTemp() + "\n\n" + "Min: " + weatherList.get(2).getMinTemp());
+			fourthDayWeatherLabel.setText("\n" + weatherList.get(1).getDescription() + "\n\n" 
+					+ "Max: " +  weatherList.get(1).getMaxTemp() + "\n\n" + "Min: " + weatherList.get(1).getMinTemp());
+			fifthDayWeatherLabel.setText("\n" + weatherList.get(0).getDescription() + "\n\n" 
+					+ "Max: " +  weatherList.get(0).getMaxTemp() + "\n\n" + "Min: " + weatherList.get(0).getMinTemp());	
 		}
 	
 	}
@@ -149,7 +149,7 @@ public class WeatherStationController {
 			
 			Image[] images = new Image[5];
 			for(int i = 0; i < 5; i++){
-				images[i] = makeImage(weatherList.get(i + 1).iconURL);
+				images[i] = makeImage(weatherList.get(i + 1).getIconURL());
 			}
 			
 			firstDayLabel.setText(weatherList.get(1).getDayOfWeek());
@@ -164,16 +164,16 @@ public class WeatherStationController {
 			fourthDayImageView.setImage(images[3]);
 			fifthDayImageView.setImage(images[4]);
 			
-			firstDayWeatherLabel.setText("\n" + weatherList.get(1).description + "\n\n" 
-					+ "Max: " +  weatherList.get(1).maxTemp + "\n\n" + "Min: " + weatherList.get(1).minTemp);
-			secondDayWeatherLabel.setText("\n" + weatherList.get(2).description + "\n\n" 
-					+ "Max: " +  weatherList.get(2).maxTemp + "\n\n" + "Min: " + weatherList.get(2).minTemp);
-			thirdDayWeatherLabel.setText("\n" + weatherList.get(3).description + "\n\n" 
-					+ "Max: " +  weatherList.get(3).maxTemp + "\n\n" + "Min: " + weatherList.get(3).minTemp);
-			fourthDayWeatherLabel.setText("\n" + weatherList.get(4).description + "\n\n" 
-					+ "Max: " +  weatherList.get(4).maxTemp + "\n\n" + "Min: " + weatherList.get(4).minTemp);
-			fifthDayWeatherLabel.setText("\n" + weatherList.get(5).description + "\n\n" 
-					+ "Max: " +  weatherList.get(5).maxTemp + "\n\n" + "Min: " + weatherList.get(5).minTemp);		
+			firstDayWeatherLabel.setText("\n" + weatherList.get(1).getDescription() + "\n\n" 
+					+ "Max: " +  weatherList.get(1).getMaxTemp() + "\n\n" + "Min: " + weatherList.get(1).getMinTemp());
+			secondDayWeatherLabel.setText("\n" + weatherList.get(2).getDescription() + "\n\n" 
+					+ "Max: " +  weatherList.get(2).getMaxTemp() + "\n\n" + "Min: " + weatherList.get(2).getMinTemp());
+			thirdDayWeatherLabel.setText("\n" + weatherList.get(3).getDescription() + "\n\n" 
+					+ "Max: " +  weatherList.get(3).getMaxTemp() + "\n\n" + "Min: " + weatherList.get(3).getMinTemp());
+			fourthDayWeatherLabel.setText("\n" + weatherList.get(4).getDescription() + "\n\n" 
+					+ "Max: " +  weatherList.get(4).getMaxTemp() + "\n\n" + "Min: " + weatherList.get(4).getMinTemp());
+			fifthDayWeatherLabel.setText("\n" + weatherList.get(5).getDescription() + "\n\n" 
+					+ "Max: " +  weatherList.get(5).getMaxTemp() + "\n\n" + "Min: " + weatherList.get(5).getMinTemp());		
 			
 		}
 		else{
