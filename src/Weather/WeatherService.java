@@ -31,6 +31,61 @@ public class WeatherService {
 		return weatherList;
 	}	
 		
+		private void populateWeatherListHistorical(int days, String location)
+	{
+		weatherList.clear();
+		
+		try {			
+			long day = System.currentTimeMillis() / 1000L;
+			int secInDay = 86400;
+			int remainingTime = days * 86400;
+			
+			double[] locationCoords = getCoords(location);
+			System.out.println("Lat: " + locationCoords[0]);
+			System.out.println("Lng: " + locationCoords[1]);
+			
+			URL url = WeatherURL.createHistoricalURL(locationCoords[0], locationCoords[1], day, location);
+			
+			if(url != null){
+				
+				do{
+					url = WeatherURL.createHistoricalURL(locationCoords[0], locationCoords[1], day - secInDay, location);
+					
+					JSONObject historical = getWeatherTask(url);	
+					weatherList.add(JSONConverter.convertJSONHistorical(historical));
+					//convertJSONHistorical(historical);
+					remainingTime -= secInDay;
+					day -= secInDay;
+						
+				}while(remainingTime > 0);
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	private void populateWeatherListForecast(String location){
+		//URL url = createURL("forecast/daily", location);
+		URL url = WeatherURL.createURL("forecast/daily", location);
+		
+		if(url != null){
+			JSONObject forecast = getWeatherTask(url);
+			weatherList = JSONConverter.convertJSONForecast(forecast);
+		}
+	}
+
+	private void populateWeatherListCurrent(String location){
+		
+		URL url = WeatherURL.createURL("weather", location);
+		
+		if(url != null){
+			
+			JSONObject current = getWeatherTask(url);
+			weatherList = JSONConverter.convertJSONcurrentWeather(current);
+		}
+	}
+
 		// getWeatherTask opens connection to the given URL and returns a JSON object
 		private JSONObject getWeatherTask(URL url){
 			
@@ -88,61 +143,6 @@ public class WeatherService {
 				e.printStackTrace();
 			}
 			return null;
-		}
-		
-		private void populateWeatherListHistorical(int days, String location)
-		{
-			weatherList.clear();
-			
-			try {			
-				long day = System.currentTimeMillis() / 1000L;
-				int secInDay = 86400;
-				int remainingTime = days * 86400;
-				
-				double[] locationCoords = getCoords(location);
-				System.out.println("Lat: " + locationCoords[0]);
-				System.out.println("Lng: " + locationCoords[1]);
-				
-				URL url = WeatherURL.createHistoricalURL(locationCoords[0], locationCoords[1], day, location);
-				
-				if(url != null){
-					
-					do{
-						url = WeatherURL.createHistoricalURL(locationCoords[0], locationCoords[1], day - secInDay, location);
-						
-						JSONObject historical = getWeatherTask(url);	
-						weatherList.add(JSONConverter.convertJSONHistorical(historical));
-						//convertJSONHistorical(historical);
-						remainingTime -= secInDay;
-						day -= secInDay;
-							
-					}while(remainingTime > 0);
-				}
-				
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
-		
-		private void populateWeatherListForecast(String location){
-			//URL url = createURL("forecast/daily", location);
-			URL url = WeatherURL.createURL("forecast/daily", location);
-			
-			if(url != null){
-				JSONObject forecast = getWeatherTask(url);
-				weatherList = JSONConverter.convertJSONForecast(forecast);
-			}
-		}
-		
-		private void populateWeatherListCurrent(String location){
-			
-			URL url = WeatherURL.createURL("weather", location);
-			
-			if(url != null){
-				
-				JSONObject current = getWeatherTask(url);
-				weatherList = JSONConverter.convertJSONcurrentWeather(current);
-			}
 		}
 		
 }
