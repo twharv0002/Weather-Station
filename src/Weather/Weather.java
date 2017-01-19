@@ -26,12 +26,10 @@ public class Weather {
         this.dayOfWeek = convertTimeStampToday(timeStamp);
         this.minTemp = numberFormat.format(minTemp) + "\u00B0F";
         this.maxTemp = numberFormat.format(maxTemp) + "\u00B0F";
-        this.humidity =
-                NumberFormat.getPercentInstance().format(humidity / 100.0);
+        this.humidity = NumberFormat.getPercentInstance().format(humidity / 100.0);
         this.description = description;
         this.iconURL = "http://openweathermap.org/img/w/" + iconName + ".png";
-        this.pressure = 
-        		NumberFormat.getPercentInstance().format(pressure / 100.0);
+        this.pressure = NumberFormat.getPercentInstance().format(pressure / 100.0);
         this.currentTemp = numberFormat.format(currentTemp) + "\u00b0F";
         date = convertTimeStampDate(timeStamp);
     }
