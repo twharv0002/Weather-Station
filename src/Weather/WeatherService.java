@@ -14,6 +14,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import utility.JSONConverter;
+
 public class WeatherService {
 	
 	private List<Weather> weatherList = new ArrayList<>();
@@ -263,6 +265,7 @@ public class WeatherService {
 			
 			if(url != null){
 				JSONObject forecast = getWeatherTask(url);
+				weatherList = JSONConverter.convertJSONForecast(forecast);
 				convertJSONForecast(forecast);
 			}
 		}
