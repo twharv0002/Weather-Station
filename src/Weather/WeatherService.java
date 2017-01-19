@@ -36,7 +36,7 @@ public class WeatherService {
 	}	
 		
 		private void convertJSONHistorical(JSONObject historical){
-			
+
 			try {
 				JSONObject daily = historical.getJSONObject("daily");
 				JSONObject currently = historical.getJSONObject("currently");
@@ -196,7 +196,8 @@ public class WeatherService {
 						url = createHistoricalURL(locationCoords[0], locationCoords[1], day - secInDay, location);
 						
 						JSONObject historical = getWeatherTask(url);	
-						convertJSONHistorical(historical);
+						weatherList.add(JSONConverter.convertJSONHistorical(historical));
+						//convertJSONHistorical(historical);
 						remainingTime -= secInDay;
 						day -= secInDay;
 							

@@ -111,6 +111,7 @@ public class WeatherStationController implements Initializable{
 		List<Weather> weatherList = new ArrayList<>();
 		if(isValidLocation(location)){
 			weatherList = weatherService.getHistoricalWeather(5, location);
+			System.out.println(weatherList.get(0).getDescription());
 			setDateForWeekLabels(weatherList);
 			setImagesForWeekImageView();
 			System.out.println(weatherList.get(0).getIconURL());
