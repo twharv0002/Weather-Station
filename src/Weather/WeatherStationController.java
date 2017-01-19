@@ -132,11 +132,11 @@ public class WeatherStationController {
 			fourthDayLabel.setText(weatherList.get(1).date);
 			fifthDayLabel.setText(weatherList.get(0).date);
 			
-			firstDayImageView.setImage(new Image("application/noPhoto-icon.png", 70, 70, false, false));
-			secondDayImageView.setImage(new Image("application/noPhoto-icon.png", 70, 70, false, false));
-			thirdDayImageView.setImage(new Image("application/noPhoto-icon.png", 70, 70, false, false));
-			fourthDayImageView.setImage(new Image("application/noPhoto-icon.png", 70, 70, false, false));
-			fifthDayImageView.setImage(new Image("application/noPhoto-icon.png", 70, 70, false, false));
+			firstDayImageView.setImage(new Image("assets/noPhoto-icon.png", 70, 70, false, false));
+			secondDayImageView.setImage(new Image("assets/noPhoto-icon.png", 70, 70, false, false));
+			thirdDayImageView.setImage(new Image("assets/noPhoto-icon.png", 70, 70, false, false));
+			fourthDayImageView.setImage(new Image("assets/noPhoto-icon.png", 70, 70, false, false));
+			fifthDayImageView.setImage(new Image("assets/noPhoto-icon.png", 70, 70, false, false));
 			
 			System.out.println(weatherList.get(0).iconURL);
 			

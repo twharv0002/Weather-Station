@@ -22,8 +22,6 @@
                <effect>
                   <InnerShadow color="#2fa1f8" height="12.1" radius="7.775" />
                </effect></Button>
-            <Button fx:id="currentWeatherButton" mnemonicParsing="false" onAction="#OnCurrentWeatherClick" text="Current" />
-            <Button fx:id="historicalWeatherButton" mnemonicParsing="false" onAction="#onHistoricalWeatherClick" text="Historical" />
         </items>
       </ToolBar>
    </top>
