@@ -23,7 +23,7 @@ public class WeatherService {
 		return weatherList;
 	}
 	
-	public static List<Weather> getCurrentWeather(String location){
+	public List<Weather> getCurrentWeather(String location){
 		populateWeatherListCurrent(location);
 		return weatherList;
 	}

@@ -4,6 +4,7 @@ import java.awt.image.BufferedImage;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ResourceBundle;
 import java.util.regex.Pattern;
 
 import javax.imageio.ImageIO;
@@ -11,13 +12,14 @@ import javax.imageio.ImageIO;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.control.Label;
 import javafx.scene.control.Button;
 
-public class WeatherStationController {
+public class WeatherStationController implements Initializable{
 	
 	@FXML private Label currentWeatherInfoLabel;
 	@FXML private Label currentWeatherLabel;
@@ -44,8 +46,17 @@ public class WeatherStationController {
 	@FXML private ImageView fifthDayImageView;
 	@FXML private ImageView currentWeatherImageView;
 	
+	private WeatherService weatherService;
+	
 	private List<Weather> weatherList = new ArrayList<>(); // List to store weather objects
 	
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		weatherService = new WeatherService();
+		
+		currentWeatherLabel.setText("Current Weather");
+		
+	}
 	@FXML
 	void onSearchButtonClick(ActionEvent event){
 		getCurrentWeather();
@@ -70,16 +81,13 @@ public class WeatherStationController {
 	// Test methods
 	private void getCurrentWeather(){
 		
-		String currentWeatherLabelTitle = "Current Weather";
-		currentWeatherLabel.setText(currentWeatherLabelTitle);
-		
 		String location = searchTextField.getText(); // Get user input from text field
 		String weatherInfo = "";
 		String extraInfo = "";
 		
 		if(isValidLocation(location)){ // Validates user input			
 			// Populate weatherList with appropriate data
-			weatherList = WeatherService.getCurrentWeather(location);
+			weatherList = weatherService.getCurrentWeather(location);
 			
 			// Setting the text of a label
 			weatherInfo += "\n\nCurrent Temperature: " + weatherList.get(0).getCurrentTemp() + "\n\n"
